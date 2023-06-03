@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    justify-content: space-between;
+}
+
+.header__menu {
+    display: flex;
+    align-items: center;
+}
+.header a,
+.header button,
+.header input {
+    margin: 5px;
+}
+
+.logo {
+    padding: 4px;
+}
+
+.search-bar {
+    width: 800px;
+    padding: 6px;
+    /* border-radius: 4px; */
+    /* border: 1px solid lightgray; */
+}
+
+.form__text {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    padding: 20px;
+}
+.form__text > div {
+    margin-bottom: 16px;
+}
+.form__text label {
+    display: block;
+    margin-bottom: 4px;
+}
+.form__text input,
+.form__text select {
+    width: 300px;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+}
+.form__text select {
+    width: 100%;
+}
