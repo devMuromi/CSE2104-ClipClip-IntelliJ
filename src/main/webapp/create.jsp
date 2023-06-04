@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*, myBean.db.*, javax.naming.NamingException"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*, myBean.db.*, javax.naming.NamingException"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,47 +37,45 @@
     </style>
     <script>
         function submitForm(event) {
-            // if (!document.getElementById("image-upload").files[0]) {
-            //     window.alert("이미지를 선택해주세요.");
-            //     event.preventDefault();
-            //     return;
-            // }
-            if (!document.getElementById("title").value) {
+            if (document.getElementById("image-upload").files.length == 0) {
+                window.alert("사진을 업로드해주세요.");
+                return false;
+            }
+            else if (!document.getElementById("title").value) {
                 window.alert("제목을 입력해주세요.");
-                event.preventDefault();
-                return;
+                return false;
             }
-            if (!document.getElementById("author").value) {
+            else if (!document.getElementById("author").value) {
                 window.alert("작성자를 입력해주세요.");
-                event.preventDefault();
-                return;
+                return false;
             }
-            if (!document.getElementById("password").value) {
+            else if (document.getElementById("categoryId").value == '0') {
+                window.alert("분류를 선택해주세요.");
+                return false;
+            }
+            else if (!document.getElementById("password").value) {
                 window.alert("비밀번호를 입력해주세요.");
-                event.preventDefault();
-                return;
+                return false;
+            } else {
+                var image = document.getElementById("image-upload").files[0].name;
+                var title = document.getElementById("title").value;
+                var author = document.getElementById("author").value;
+                var categoryId = document.getElementById("categoryId").value;
+                var password = document.getElementById("password").value;
+                var tags = document.getElementById("tags").value;
+                var description = document.getElementById("description").value;
+                var msg = "입력을 확인해주세요.\n";
+                msg += "이미지파일: " + image + "\n";
+                msg += "제목: " + title + "\n";
+                msg += "작성자: " + author + "\n";
+                msg += "분류번호: " + categoryId + "\n";
+                msg += "비밀번호: " + "*".repeat(password.length) + "\n";
+                msg += "태그: " + tags + "\n";
+                msg += "설명: " + description + "\n";
+                window.alert(msg);
+
+                return true;
             }
-
-            var image = document.getElementById("image-upload").files[0].name;
-            var title = document.getElementById("title").value;
-            var category = document.getElementById("category").value;
-            var tag = document.getElementById("tag").value;
-            var author = document.getElementById("author").value;
-            var password = document.getElementById("password").value;
-            var msg = "입력을 확인해주세요.\n";
-            msg += "이미지파일: " + image + "\n";
-            msg += "제목: " + title + "\n";
-            msg += "분류: " + category + "\n";
-            msg += "태그: " + tag + "\n";
-            msg += "작성자: " + author + "\n";
-            msg += "비밀번호: " + "*".repeat(password.length) + "\n";
-            window.alert(msg);
-        }
-
-        function categoryChange() {
-            var selectedIndex = document.getElementById("category").selectedIndex;
-            var selectedOption = document.getElementById("category").options[selectedIndex];
-            alert("분류를 " + selectedOption.text + "로 변경했습니다.");
         }
     </script>
 </head>
@@ -85,20 +83,20 @@
 <%@ include file="template-header.jsp"%>
 
 <div class="main">
-    <form action="create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
+    <form onsubmit="return submitForm()" action="create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
         <div class="form__image align-self-center">
             <img class="" id="preview-image"/>
-            <input type="file" id="image-upload" name="image-file"/>
+            <input type="file" id="image-upload" name="imageFile"/>
         </div>
         <div class="form__box border p-3 ms-5 align-self-center">
             <div class="form-floating mb-3">
                 <input class="form-control" type="text" id="title"
-                       placeholder="title"  name="title">
+                       placeholder="title" name="title">
                 <label for="title">제목</label>
             </div>
 
-            <select class="form-select mb-3" name="categoryId" onchange="categoryChange()">
-                <option selected>분류</option>
+            <select class="form-select mb-3" id="categoryId" name="categoryId">
+                <option value="0" selected>분류</option>
                 <%
                     Connection con = null;
                     Statement stmt = null;
@@ -142,9 +140,13 @@
                        placeholder="password">
                 <label for="password">비밀번호</label>
             </div>
-            <button class="btn btn-outline-dark" onclick="submitForm()">등록하기</button>
+            <div class="form-floating mb-3">
+                <input class="form-control" type="textarea" id="description"
+                       name="description" placeholder="description">
+                <label for="description">설명</label>
+            </div>
+            <button class="btn btn-outline-dark" onclick="">등록하기</button>
         </div>
-
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

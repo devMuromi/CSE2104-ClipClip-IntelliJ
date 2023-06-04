@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=utf-8" import="java.sql.*, java.util.*, myBean.db.*, myBean.part.MyPart, javax.naming.*" %>
-<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.sql.*, java.util.*, myBean.db.*, myBean.part.MyPart, javax.naming.*, java.time.LocalDateTime" %>
 <%
     request.setCharacterEncoding("utf-8");
     String title = request.getParameter("title");
@@ -9,7 +8,7 @@
     String author = request.getParameter("author");
     String password = request.getParameter("password");
     String description = request.getParameter("description");
-    Part part = request.getPart("image-file");
+    Part part = request.getPart("imageFile");
     if (title == null)
         title = "no data";
     if (author == null)
@@ -17,9 +16,7 @@
 
 // 파일 저장
 String realFolder = request.getSession().getServletContext().getRealPath("/upload");
-System.out.println(realFolder);
 MyPart mypart = new MyPart(part, realFolder);
-
 
 Clipart clipart = new Clipart();
 clipart.setTitle(title);

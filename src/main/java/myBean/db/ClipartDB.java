@@ -16,6 +16,17 @@ public class ClipartDB {
         con = DsCon.getConnection();
     }
 
+    public boolean checkPassword(int id, String password) throws SQLException {
+        String sql = "SELECT password FROM clipart WHERE id = ? AND password = PASSWORD(?)";
+        pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        pstmt.setString(2, password);
+        rs = pstmt.executeQuery();
+
+        boolean passwordMatched = rs.next();
+        return passwordMatched;
+    }
+
     public int insertRecord(Clipart clipart) throws SQLException {
         String sql = "INSERT INTO clipart(title, author, categoryId, password, tags, description, viewCount, downloadCount, createDate, lastUpdate, originalFileName, savedFileName) VALUES(?, ?, ?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -72,7 +83,6 @@ public class ClipartDB {
         return clipart;
     }
 
-
 //    public void updateRecord(Clipart art) throws SQLException {
 ////        String sql = "INSERT INTO clipart(title, user, category_id, password, tags, description, file, create_date, last_update) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 //
@@ -87,23 +97,13 @@ public class ClipartDB {
 //        pstmt.executeUpdate();
 //    }
 
+    public void deleteRecord(int id) throws SQLException {
+        String sql = "DELETE FROM clipart WHERE id=?";
+        pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        pstmt.executeUpdate();
+    }
 
-
-    //4. 지정된 idx에 해당하는 레코드 삭제 deleteRecord() 선언
-    //	@param : int
-    //	@return : void
-    //	@throws : SQLException
-
-//    public void deleteRecord(int idx) throws SQLException {
-//        String sql = "DELETE FROM member WHERE idx=?";
-//        pstmt = con.prepareStatement(sql);
-//        pstmt.setInt(1, idx);
-//        pstmt.executeUpdate();
-//    }
-
-    //5. open된 모든 연결자 정보를 제거
-    //   @param is'nt
-    //   @return void
     public void close() throws SQLException {
         if(rs != null) rs.close();
         if(pstmt != null) pstmt.close();

@@ -21,7 +21,6 @@ public class MyPart {
             String fileDotExt = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());
             UUID uuid = UUID.randomUUID();	//UUID: 범용 고유 식별자
             savedFileName = originalFileName.substring(0, originalFileName.lastIndexOf(".")) + "_" + uuid.toString() + fileDotExt;
-            System.out.println(realFolder + File.separator + savedFileName);
 
             part.write(realFolder + File.separator + savedFileName);
         }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*, myBean.db.*, javax.naming.NamingException"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*, myBean.db.*, javax.naming.NamingException"%>
 <%
     request.setCharacterEncoding("UTF-8");
     String order_by = request.getParameter("order_by");
@@ -109,7 +109,6 @@
                 }
             %>
         </div>
-
     </nav>
     <div class="content">
         <%
