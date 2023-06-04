@@ -1,7 +1,5 @@
 package myBean.db;
 
-import java.util.Date;
-
 public class Category
 {
     private int id;

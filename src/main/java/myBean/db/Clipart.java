@@ -84,7 +84,6 @@ public class Clipart
         this.downloadCount = downloadCount;
     }
 
-
     public LocalDateTime getCreateDate() {
         return createDate;
     }

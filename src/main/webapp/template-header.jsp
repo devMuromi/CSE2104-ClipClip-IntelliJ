@@ -7,6 +7,6 @@
   </div>
   <div class="header__menu">
     <a class="btn btn-outline-dark" href="create.jsp">새 클립아트 업로드</a>
-    <a class="btn btn-outline-dark" id="">☰</a>
+    <a class="btn btn-outline-dark" href="category-manage.jsp">☰</a>
   </div>
 </header>
