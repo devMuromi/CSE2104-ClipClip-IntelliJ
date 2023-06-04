@@ -10,7 +10,7 @@
               password="1234"
               maxIdle="3"
               maxTotal="5"
-              maxWaitMillis="3000">
+              maxWaitMillis="5000">
     </Resource>
 </Context>
 

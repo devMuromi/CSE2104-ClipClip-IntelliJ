@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*, myBean.db.*, javax.naming.NamingException"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -88,7 +88,7 @@
     <form action="create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center">
         <div class="form__image align-self-center">
             <img class="" id="preview-image"/>
-            <input type="file" id="image-upload" name="image-"/>
+            <input type="file" id="image-upload" name="imagefile"/>
         </div>
         <div class="form__box border p-3 ms-5 align-self-center">
             <div class="form-floating mb-3">
@@ -96,11 +96,35 @@
                        placeholder="title"  name="title">
                 <label for="title">제목</label>
             </div>
+
             <select class="form-select mb-3" name="category" onchange="categoryChange()">
                 <option selected>분류</option>
-                <option value="human">사람</option>
-                <option value="animal">동물</option>
-                <option value="car">자동차</option>
+                <%
+                    Connection con = null;
+                    Statement stmt = null;
+                    ResultSet rs = null;
+                    try {
+                        con = DsCon.getConnection();
+                        stmt = con.createStatement();
+                        String query = "SELECT id, name FROM category";
+                        rs = stmt.executeQuery(query);
+
+                        while (rs.next()) {
+                %>
+                <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
+                <%
+                        }
+                        rs.close(); // ResultSet 종료
+                        stmt.close(); // Statement 종료
+                        con.close(); // Connection 종료
+                    } catch (SQLException e) {
+                        out.println("err:" + e.toString());
+                        return;
+                    } catch (NamingException e) {
+                        out.println("err:" + e.toString());
+                        return;
+                    }
+                %>
             </select>
             <div class="form-floating mb-3">
                 <input class="form-control" type="text" id="tags"

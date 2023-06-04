@@ -10,8 +10,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="423f575e-e3f2-4a32-807e-514847bb25a2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myBean/part/MyPart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myBean/db/Clipart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myBean/db/Clipart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myBean/db/ClipartDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myBean/db/ClipartDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myBean/multipart/MyMultiPart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myBean/multipart/MyPart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/META-INF/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/META-INF/context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/create_do.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/create_do.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/ClipClip-1.0-SNAPSHOT.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/META-INF/context.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/classes/com/example/clipclip/HelloServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/classes/myBean/db/Category.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/classes/myBean/db/CategoryDB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/classes/myBean/db/Clipart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/classes/myBean/db/ClipartDB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/classes/myBean/db/DsCon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/lib/mariadb-java-client-3.1.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/clipart.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/create.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/create_do.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/template-header.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/upload/template-style.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +92,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="myBean.db" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -162,11 +194,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685809724013</updated>
-      <workItem from="1685809725246" duration="3522000" />
+      <workItem from="1685809725246" duration="12230000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/create.jsp</url>
+          <line>5</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

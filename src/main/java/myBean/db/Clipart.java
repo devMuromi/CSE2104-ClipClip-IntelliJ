@@ -1,9 +1,6 @@
 package myBean.db;
 
-import myBean.multipart.MyPart;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Clipart
 {
@@ -18,7 +15,8 @@ public class Clipart
     private int downloadCount;
     private LocalDateTime createDate;
     private LocalDateTime lastUpdate;
-    private MyPart part;
+    private String originalFileName;
+    private String savedFileName;
 
     public Clipart() {
     }
@@ -26,7 +24,9 @@ public class Clipart
     public int getId() {
         return id;
     }
-    public void setId(int id) {this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -99,11 +99,18 @@ public class Clipart
         this.lastUpdate = lastUpdate;
     }
 
-    public MyPart getPart() {
-        return part;
+    public String getOriginalFileName() {
+        return originalFileName;
     }
-    public void setPart(MyPart part) {
-        this.part = part;
+    public void setOriginalFileName(String originalFileName) {
+        this.originalFileName = originalFileName;
+    }
+
+    public String getSavedFileName() {
+        return savedFileName;
+    }
+    public void setSavedFileName(String savedFileName) {
+        this.savedFileName = savedFileName;
     }
 }
 

@@ -1,8 +1,10 @@
 package myBean.db;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import javax.naming.NamingException;
 import myBean.db.DsCon;
+import jakarta.servlet.http.Part;
 
 public class ClipartDB {
     private Connection con;
@@ -12,54 +14,52 @@ public class ClipartDB {
 
     public ClipartDB() throws NamingException, SQLException {
         con = DsCon.getConnection();
-
     }
 
     public void insertRecord(Clipart clipart) throws SQLException {
-        String sql = "INSERT INTO clipart(title, user, category_id, password, tags, description, file, create_date, last_update) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO clipart(title, author, categoryId, password, tags, description, viewCount, downloadCount, createDate, lastUpdate, originalFileName, savedFileName) VALUES(?, ?, ?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?)";
 
         pstmt = con.prepareStatement(sql);
         pstmt.setString(1, clipart.getTitle());
-        pstmt.setString(2, clipart.getUser());
+        pstmt.setString(2, clipart.getAuthor());
         pstmt.setInt(3, clipart.getCategoryId());
         pstmt.setString(4, clipart.getPassword());
         pstmt.setString(5, String.join(",", clipart.getTags()));
         pstmt.setString(6, clipart.getDescription());
-//        pstmt.setString(7, clipart.getFile());
-        java.util.Date createDate = clipart.getCreateDate();
-        java.sql.Date sqlCreateDate = new java.sql.Date(createDate.getTime());
-        pstmt.setDate(8, sqlCreateDate);
+        pstmt.setInt(7, clipart.getViewCount());
+        pstmt.setInt(8, clipart.getDownloadCount());
 
-        java.util.Date lastUpdate = clipart.getLastUpdate();
-        java.sql.Date sqlLastUpdate = new java.sql.Date(lastUpdate.getTime());
-        pstmt.setDate(9, sqlLastUpdate);
+        LocalDateTime createDate = clipart.getCreateDate();
+        java.sql.Timestamp sqlCreateDate = java.sql.Timestamp.valueOf(createDate);
+        pstmt.setTimestamp(9, sqlCreateDate);
 
+        LocalDateTime lastUpdate = clipart.getLastUpdate();
+        java.sql.Timestamp sqlLastUpdate = java.sql.Timestamp.valueOf(lastUpdate);
+        pstmt.setTimestamp(10, sqlLastUpdate);
+
+        pstmt.setString(11, clipart.getOriginalFileName());
+        pstmt.setString(12, clipart.getSavedFileName());
         pstmt.executeUpdate();
     }
 
-    public Clipart getRecord(int idx) throws SQLException {
+    public Clipart getRecord(int id) throws SQLException {
         Clipart clipart = new Clipart();
-        String sql = "SELECT title, user, category_id, password, tags, description, view_count, download_count, file, create_date, last_update FROM clipart WHERE idx=?";
+        String sql = "SELECT title, author, categoryId, tags, description, viewCount, downloadCount, createDate, lastUpdate, originalFileName, savedFileName FROM clipart WHERE id=?";
         pstmt = con.prepareStatement(sql);
-        pstmt.setInt(1, idx);
+        pstmt.setInt(1, id);
         rs = pstmt.executeQuery();
         rs.next();
 
-        clipart.setIdx(idx);
+        clipart.setId(id);
         clipart.setTitle(rs.getString("title"));
-        clipart.setUser(rs.getString("user"));
-        clipart.setCategoryId(rs.getInt("category_id"));
-        clipart.setPassword(rs.getString("password"));
+        clipart.setAuthor(rs.getString("user"));
+        clipart.setCategoryId(rs.getInt("categoryId"));
         clipart.setTags(rs.getString("tags").split(","));
         clipart.setDescription(rs.getString("description"));
-        clipart.setViewCount(rs.getInt("view_count"));
-        clipart.setDownloadCount(rs.getInt("download_count"));
-        clipart.setFile(rs.getString("file"));
-//        java.sql.Date createDate = rs.getDate("create_date");
-//        clipart.setCreateDate(new java.util.Date(createDate.getTime()));
-//        java.sql.Date lastUpdate = rs.getDate("last_update");
-//        clipart.setLastUpdate(new java.util.Date(lastUpdate.getTime()));
-
+        clipart.setViewCount(rs.getInt("viewCount"));
+        clipart.setDownloadCount(rs.getInt("downloadCount"));
+        clipart.setOriginalFileName(rs.getString("originalFileName"));
+        clipart.setSavedFileName(rs.getString("savedFileName"));
         return clipart;
     }
 

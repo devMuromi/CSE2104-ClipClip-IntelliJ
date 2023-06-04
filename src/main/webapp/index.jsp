@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*, myBean.db.*, javax.naming.NamingException"%>
 <%
     request.setCharacterEncoding("UTF-8");
+    String order_by = request.getParameter("order_by");
+    if (order_by == null) {
+        order_by = "latest";
+    }
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -75,19 +79,44 @@
 <%@ include file="template-header.jsp"%>
 <div class="main">
     <nav class="nav">
-        <a class="nav--imp" href="">최신순</a> <a class="nav--imp" href="">다운로드순</a> <a class="nav--imp" href="">무작위</a>
+        <a class="nav--imp" href="index.jsp?order_by=latest">최신순</a> <a class="nav--imp" href="index.jsp?order_by=download">다운로드순</a> <a class="nav--imp" href="index.jsp?order_by=random">무작위</a>
         <div class="nav--line"></div>
-        <a href="">사람(0)</a> <a class="nav__selected" href="">동물(10)</a> <a href="">자동차(0)</a>
+        <div id="category-list">
+            <%
+                Connection con = null;
+                Statement stmt = null;
+                ResultSet rs = null;
+                try {
+                    con = DsCon.getConnection();
+                    stmt = con.createStatement();
+                    String query = "SELECT id, name FROM category";
+                    rs = stmt.executeQuery(query);
+
+                    while (rs.next()) {
+            %>
+            <a href="index.jsp?category=<%=rs.getInt("id")%>"><%=rs.getString("name")%></a>
+            <%
+                    }
+                    rs.close(); // ResultSet 종료
+                    stmt.close(); // Statement 종료
+                    con.close(); // Connection 종료
+                } catch (SQLException e) {
+                    out.println("err:" + e.toString());
+                    return;
+                } catch (NamingException e) {
+                    out.println("err:" + e.toString());
+                    return;
+                }
+            %>
+        </div>
+
     </nav>
     <div class="content">
         <%
-            Connection con = null;
-            Statement stmt = null;
-            ResultSet rs = null;
             try {
                 con = DsCon.getConnection();
                 stmt = con.createStatement();
-                String query = "SELECT idx, title, user FROM clipart";
+                String query = "SELECT id, title, author FROM clipart";
                 rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
@@ -100,7 +129,7 @@
             </a>
             <div class="clip-art__meta">
                 <a onclick="location.href='clipart.jsp?idx=<%=rs.getInt("idx")%>'" class="clip-art__title"><%=rs.getString("title")%></a>
-                <a onclick="location.href='clipart.jsp?idx=<%=rs.getInt("idx")%>'" class="clip-art--author"><%=rs.getString("user")%></a>
+                <a onclick="location.href='clipart.jsp?idx=<%=rs.getInt("idx")%>'" class="clip-art--author"><%=rs.getString("username")%></a>
                 <a onclick="location.href='clipart-delete.jsp?idx=<%=rs.getInt("idx")%>'" class="">삭제</a>
             </div>
         </div>
