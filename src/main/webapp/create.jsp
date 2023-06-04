@@ -85,10 +85,10 @@
 <%@ include file="template-header.jsp"%>
 
 <div class="main">
-    <form action="create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center">
+    <form action="create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
         <div class="form__image align-self-center">
             <img class="" id="preview-image"/>
-            <input type="file" id="image-upload" name="imagefile"/>
+            <input type="file" id="image-upload" name="image-file"/>
         </div>
         <div class="form__box border p-3 ms-5 align-self-center">
             <div class="form-floating mb-3">
@@ -97,7 +97,7 @@
                 <label for="title">제목</label>
             </div>
 
-            <select class="form-select mb-3" name="category" onchange="categoryChange()">
+            <select class="form-select mb-3" name="categoryId" onchange="categoryChange()">
                 <option selected>분류</option>
                 <%
                     Connection con = null;
@@ -128,12 +128,12 @@
             </select>
             <div class="form-floating mb-3">
                 <input class="form-control" type="text" id="tags"
-                       placeholder="tags" name="tags">
+                        name="tags" placeholder="tags">
                 <label for="tags">태그(','로 구분)</label>
             </div>
             <div class="form-floating mb-3">
                 <input class="form-control" type="text" id="author"
-                       placeholder="author" name="author">
+                        name="author" placeholder="author">
                 <label for="author">작성자</label>
             </div>
             <div class="form-floating mb-3">

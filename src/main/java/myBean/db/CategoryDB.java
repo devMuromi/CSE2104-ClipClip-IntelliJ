@@ -23,15 +23,15 @@ public class CategoryDB {
         pstmt.executeUpdate();
     }
 
-    public Category getRecord(int idx) throws SQLException {
+    public Category getRecord(int id) throws SQLException {
         Category category = new Category();
-        String sql = "SELECT name FROM category WHERE idx=?";
+        String sql = "SELECT name FROM category WHERE id=?";
         pstmt = con.prepareStatement(sql);
-        pstmt.setInt(1, idx);
+        pstmt.setInt(1, id);
         rs = pstmt.executeQuery();
         rs.next();
 
-        category.setIdx(idx);
+        category.setId(id);
         category.setName(rs.getString("name"));
 
         return category;

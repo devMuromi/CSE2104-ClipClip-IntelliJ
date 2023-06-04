@@ -16,10 +16,10 @@ public class ClipartDB {
         con = DsCon.getConnection();
     }
 
-    public void insertRecord(Clipart clipart) throws SQLException {
+    public int insertRecord(Clipart clipart) throws SQLException {
         String sql = "INSERT INTO clipart(title, author, categoryId, password, tags, description, viewCount, downloadCount, createDate, lastUpdate, originalFileName, savedFileName) VALUES(?, ?, ?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        pstmt = con.prepareStatement(sql);
+        pstmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, clipart.getTitle());
         pstmt.setString(2, clipart.getAuthor());
         pstmt.setInt(3, clipart.getCategoryId());
@@ -40,6 +40,13 @@ public class ClipartDB {
         pstmt.setString(11, clipart.getOriginalFileName());
         pstmt.setString(12, clipart.getSavedFileName());
         pstmt.executeUpdate();
+
+        int generatedId = -1;
+        rs = pstmt.getGeneratedKeys();
+        if (rs.next()) {
+            generatedId = rs.getInt(1);
+        }
+        return generatedId;
     }
 
     public Clipart getRecord(int id) throws SQLException {
@@ -52,12 +59,14 @@ public class ClipartDB {
 
         clipart.setId(id);
         clipart.setTitle(rs.getString("title"));
-        clipart.setAuthor(rs.getString("user"));
+        clipart.setAuthor(rs.getString("author"));
         clipart.setCategoryId(rs.getInt("categoryId"));
         clipart.setTags(rs.getString("tags").split(","));
         clipart.setDescription(rs.getString("description"));
         clipart.setViewCount(rs.getInt("viewCount"));
         clipart.setDownloadCount(rs.getInt("downloadCount"));
+        clipart.setCreateDate(rs.getTimestamp("createDate").toLocalDateTime());
+        clipart.setLastUpdate(rs.getTimestamp("lastUpdate").toLocalDateTime());
         clipart.setOriginalFileName(rs.getString("originalFileName"));
         clipart.setSavedFileName(rs.getString("savedFileName"));
         return clipart;

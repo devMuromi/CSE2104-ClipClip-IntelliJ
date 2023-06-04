@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Category
 {
-    private int idx;
+    private int id;
     private String name;
 
     public Category() {
     }
 
-    public int getIdx() {
-        return idx;
+    public int getId() {
+        return id;
     }
-    public void setIdx(int idx) {
-        this.idx = idx;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

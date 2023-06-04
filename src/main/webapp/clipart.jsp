@@ -33,12 +33,19 @@
 <%@ include file="template-header.jsp" %>
 
 <%
-    int idx = Integer.parseInt(request.getParameter("idx"));
+    int id = -1;
+    String raw_id = request.getParameter("id");
+    if (raw_id == null || raw_id == "-1") {
+        response.sendRedirect("index.jsp");
+    }
+    else {
+        id = Integer.parseInt(raw_id);
+    }
     try {
         ClipartDB db = new ClipartDB();
         CategoryDB categoryDb = new CategoryDB();
 
-        Clipart clipart = db.getRecord(idx);
+        Clipart clipart = db.getRecord(id);
         int categoryIdx = clipart.getCategoryId();
 
         Category category = categoryDb.getRecord(categoryIdx);
@@ -63,12 +70,15 @@
         </div>
         <div><%=clipart.getDescription()%></div>
         <div>
-            <span><%=clipart.getUser()%></span>
-            <span class="float-end">최종 수정일시: <%=clipart.getLastUpdate()%></span>
+            <span><%=clipart.getAuthor()%></span>
+            <span class="float-end">최종 수정일시:
+                <%=clipart.getLastUpdate().getYear()%>-<%=clipart.getLastUpdate().getMonthValue()%>-<%=clipart.getLastUpdate().getDayOfMonth()%>
+                <%=clipart.getLastUpdate().getHour()%>:<%=clipart.getLastUpdate().getMinute()%>
+            </span>
         </div>
         <div>
-            <button class="btn btn-outline-dark">수정</button>
-            <button class="btn btn-outline-dark">삭제</button>
+            <button class="btn btn-outline-dark" onclick="location.href='clipart-modify.jsp?id=<%=clipart.getId()%>'">수정</button>
+            <button class="btn btn-outline-dark" onclick="location.href='clipart-delete.jsp?id=<%=clipart.getId()%>'">삭제</button>
         </div>
     </div>
 </div>

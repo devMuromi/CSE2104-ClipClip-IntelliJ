@@ -116,21 +116,19 @@
             try {
                 con = DsCon.getConnection();
                 stmt = con.createStatement();
-                String query = "SELECT id, title, author FROM clipart";
+                String query = "SELECT id, title, author, savedFileName FROM clipart";
                 rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
         %>
         <div class="clip-art">
-            <a onclick="location.href='clipart.jsp?idx=<%=rs.getInt("idx")%>'" class="clip-art__image">
-                <img
-                    src="https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg?w=136&h=136"
-                    alt="clipart name~"/>
+            <a onclick="location.href='clipart.jsp?id=<%=rs.getInt("id")%>'" class="clip-art__image">
+                <img src="./upload/<%=rs.getString("savedFileName")%>" alt="<%=rs.getString("title")%>">
             </a>
             <div class="clip-art__meta">
-                <a onclick="location.href='clipart.jsp?idx=<%=rs.getInt("idx")%>'" class="clip-art__title"><%=rs.getString("title")%></a>
-                <a onclick="location.href='clipart.jsp?idx=<%=rs.getInt("idx")%>'" class="clip-art--author"><%=rs.getString("username")%></a>
-                <a onclick="location.href='clipart-delete.jsp?idx=<%=rs.getInt("idx")%>'" class="">삭제</a>
+                <a onclick="location.href='clipart.jsp?id=<%=rs.getInt("id")%>'" class="clip-art__title"><%=rs.getString("title")%></a>
+                <a onclick="location.href='clipart.jsp?id=<%=rs.getInt("id")%>'" class="clip-art--author"><%=rs.getString("author")%></a>
+                <a onclick="location.href='clipart-delete.jsp?id=<%=rs.getInt("id")%>'" class="">삭제</a>
             </div>
         </div>
         <%
