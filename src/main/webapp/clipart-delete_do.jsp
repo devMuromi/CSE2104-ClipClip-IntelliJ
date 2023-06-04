@@ -14,6 +14,4 @@
         response.sendRedirect("index.jsp");
     }
     db.close();
-
-
 %>

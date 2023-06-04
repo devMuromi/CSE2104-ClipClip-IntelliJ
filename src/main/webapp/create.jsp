@@ -8,7 +8,7 @@
             display: flex;
             justify-content: center;
         }
-        .form__image {
+        .form--image {
             position: relative;
             width: 512px;
             height: 512px;
@@ -16,15 +16,13 @@
             text-align: center;
             overflow: hidden;
         }
-
-        .form__image > input {
+        .form--image > input {
             width: 100%;
             height: 100%;
             opacity: 0;
             cursor: pointer;
         }
-
-        .form__image > img {
+        .form--image > img {
             display: block;
             max-width: 100%;
             max-height: 100%;
@@ -77,6 +75,17 @@
                 return true;
             }
         }
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+
+            reader.onload = function(){
+                var preview = document.getElementById('preview-image');
+                preview.src = reader.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
     </script>
 </head>
 <body>
@@ -84,9 +93,11 @@
 
 <div class="main">
     <form onsubmit="return submitForm()" action="create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
-        <div class="form__image align-self-center">
-            <img class="" id="preview-image"/>
-            <input type="file" id="image-upload" name="imageFile"/>
+        <div class="form--image align-self-center">
+            <label for="image-upload">
+                <img class="" id="preview-image"/>
+            </label>
+            <input type="file" id="image-upload" name="imageFile" onchange="previewImage(event)"/>
         </div>
         <div class="form__box border p-3 ms-5 align-self-center">
             <div class="form-floating mb-3">
@@ -130,8 +141,13 @@
                 <label for="tags">태그(','로 구분)</label>
             </div>
             <div class="form-floating mb-3">
+                <input class="form-control" type="textarea" id="description"
+                       name="description" placeholder="description">
+                <label for="description">설명</label>
+            </div>
+            <div class="form-floating mb-3">
                 <input class="form-control" type="text" id="author"
-                        name="author" placeholder="author">
+                       name="author" placeholder="author">
                 <label for="author">작성자</label>
             </div>
             <div class="form-floating mb-3">
@@ -139,11 +155,6 @@
                        id="password" name="password"
                        placeholder="password">
                 <label for="password">비밀번호</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input class="form-control" type="textarea" id="description"
-                       name="description" placeholder="description">
-                <label for="description">설명</label>
             </div>
             <button class="btn btn-outline-dark" onclick="">등록하기</button>
         </div>
