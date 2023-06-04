@@ -9,10 +9,6 @@
     String password = request.getParameter("password");
     String description = request.getParameter("description");
     Part part = request.getPart("imageFile");
-    if (title == null)
-        title = "no data";
-    if (author == null)
-        author = "no data";
 
 // 파일 저장
 String realFolder = request.getSession().getServletContext().getRealPath("/upload");
@@ -30,9 +26,7 @@ clipart.setDownloadCount(0);
 clipart.setCreateDate(LocalDateTime.now());
 clipart.setLastUpdate(LocalDateTime.now());
 clipart.setOriginalFileName(mypart.getOriginalFileName());
-System.out.println(mypart.getOriginalFileName());
 clipart.setSavedFileName(mypart.getSavedFileName());
-System.out.println(mypart.getSavedFileName());
 
 
 ClipartDB db = new ClipartDB();

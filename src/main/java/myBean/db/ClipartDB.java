@@ -83,19 +83,29 @@ public class ClipartDB {
         return clipart;
     }
 
-//    public void updateRecord(Clipart art) throws SQLException {
-////        String sql = "INSERT INTO clipart(title, user, category_id, password, tags, description, file, create_date, last_update) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//
-//        String sql = "UPDATE clipart SET id=?, name=?, pwd=? WHERE idx=?";
-//        pstmt = con.prepareStatement(sql);
-//
-//        pstmt.setString(1, art.getId());
-//        pstmt.setString(2, art.getName());
-//        pstmt.setString(3, art.getPwd());
-//        pstmt.setInt(4, art.getIdx());
-//
-//        pstmt.executeUpdate();
-//    }
+    public void updateRecord(Clipart clipart) throws SQLException {
+//        String sql = "INSERT INTO clipart(title, user, category_id, password, tags, description, file, create_date, last_update) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        String sql = "UPDATE clipart SET title=?, author=?, categoryId=?, tags=?, description=?, lastUpdate=?, originalFileName=?, savedFileName=? WHERE id=?";
+        pstmt = con.prepareStatement(sql);
+
+        pstmt = con.prepareStatement(sql);
+
+        pstmt.setString(1, clipart.getTitle());
+        pstmt.setString(2, clipart.getAuthor());
+        pstmt.setInt(3, clipart.getCategoryId());
+        pstmt.setString(4, String.join(",", clipart.getTags()));
+        pstmt.setString(5, clipart.getDescription());
+        LocalDateTime lastUpdate = clipart.getLastUpdate();
+        java.sql.Timestamp sqlLastUpdate = java.sql.Timestamp.valueOf(lastUpdate);
+        pstmt.setTimestamp(6, sqlLastUpdate);
+
+        pstmt.setString(7, clipart.getOriginalFileName());
+        pstmt.setString(8, clipart.getSavedFileName());
+        pstmt.setInt(9, clipart.getId());
+
+        pstmt.executeUpdate();
+    }
 
     public void deleteRecord(int id) throws SQLException {
         String sql = "DELETE FROM clipart WHERE id=?";

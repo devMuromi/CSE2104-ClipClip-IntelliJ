@@ -36,6 +36,26 @@
         }
     </style>
     <script>
+        function submitForm(event) {
+            if (!document.getElementById("title").value) {
+                window.alert("제목을 입력해주세요.");
+                return false;
+            }
+            else if (!document.getElementById("author").value) {
+                window.alert("작성자를 입력해주세요.");
+                return false;
+            }
+            else if (document.getElementById("categoryId").value == '0') {
+                window.alert("분류를 선택해주세요.");
+                return false;
+            }
+            else if (!document.getElementById("password").value) {
+                window.alert("비밀번호를 입력해주세요.");
+                return false;
+            } else {
+                return true;
+            }
+        }
         function previewImage(event) {
             var input = event.target;
             var reader = new FileReader();
@@ -71,7 +91,7 @@
 
             Category category = categoryDb.getRecord(categoryIdx);
     %>
-    <form onsubmit="return submitForm()" action="clipart-modify_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
+    <form onsubmit="return submitForm()" action="clipart-modify_do.jsp?id=<%=id%>" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
         <div class="form--image align-self-center">
             <label for="image-upload">
                 <img src="./upload/<%=clipart.getSavedFileName()%>" class="" id="preview-image"/>
