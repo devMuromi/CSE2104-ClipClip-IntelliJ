@@ -1,29 +1,32 @@
 package myBean.db;
 
+import myBean.multipart.MyPart;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Clipart
 {
-    private int idx;
+    private int id;
     private String title;
-    private String user;
+    private String author;
     private int categoryId;
     private String password;
     private String[] tags;
     private String description;
     private int viewCount;
     private int downloadCount;
-    private String file; // 수정
-    private Date createDate;
-    private Date lastUpdate;
+    private LocalDateTime createDate;
+    private LocalDateTime lastUpdate;
+    private MyPart part;
 
     public Clipart() {
     }
 
-    public int getIdx() {
-        return idx;
+    public int getId() {
+        return id;
     }
-    public void setIdx(int idx) {this.idx = idx;}
+    public void setId(int id) {this.id = id;}
 
     public String getTitle() {
         return title;
@@ -32,11 +35,11 @@ public class Clipart
         this.title = title;
     }
 
-    public String getUser() {
-        return user;
+    public String getAuthor() {
+        return author;
     }
-    public void setUser(String user) {
-        this.user = user;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public int getCategoryId() {
@@ -73,9 +76,6 @@ public class Clipart
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
-    public void incrementViewCount() {
-        this.viewCount = this.viewCount+1;
-    }
 
     public int getDownloadCount() {
         return downloadCount;
@@ -83,29 +83,27 @@ public class Clipart
     public void setDownloadCount(int downloadCount) {
         this.downloadCount = downloadCount;
     }
-    public void incrementDownloadCount(){
-        this.downloadCount = this.downloadCount+1;
-    }
 
-    public String getFile() {
-        return file;
-    }
-    public void setFile(String file) {
-        this.file = file;
-    }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public MyPart getPart() {
+        return part;
+    }
+    public void setPart(MyPart part) {
+        this.part = part;
     }
 }
 
