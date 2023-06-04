@@ -10,11 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="423f575e-e3f2-4a32-807e-514847bb25a2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/clipart-create.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/create_do.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/clipart-create_do.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/template-header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/template-header.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +185,7 @@
       <workItem from="1685882260055" duration="1394000" />
       <workItem from="1685883884746" duration="23955000" />
       <workItem from="1685909529417" duration="1397000" />
-      <workItem from="1685910931634" duration="6677000" />
+      <workItem from="1685910931634" duration="6776000" />
     </task>
     <servers />
   </component>
