@@ -34,7 +34,7 @@
         }
     </style>
     <script>
-        function submitForm(event) {
+        function submitConfirm() {
             if (document.getElementById("image-upload").files.length == 0) {
                 window.alert("사진을 업로드해주세요.");
                 return false;
@@ -72,7 +72,7 @@
                 msg += "설명: " + description + "\n";
                 window.alert(msg);
 
-                return true;
+                document.submitForm.submit();
             }
         }
         function previewImage(event) {
@@ -92,7 +92,7 @@
 <%@ include file="template-header.jsp"%>
 
 <div class="main">
-    <form onsubmit="return submitForm()" action="clipart-create_do.jsp" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
+    <form onsubmit="return submitForm()" action="clipart-create_do.jsp" method="post" name="submitForm" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
         <div class="form--image align-self-center">
             <label for="image-upload">
                 <img class="" id="preview-image"/>
@@ -156,7 +156,7 @@
                        placeholder="password">
                 <label for="password">비밀번호</label>
             </div>
-            <button class="btn btn-outline-dark" onclick="">등록하기</button>
+            <input class="btn btn-outline-dark" type="button" value="등록하기" onclick="submitConfirm()" />
         </div>
     </form>
 </div>

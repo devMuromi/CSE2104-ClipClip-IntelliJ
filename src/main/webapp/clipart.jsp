@@ -42,14 +42,14 @@
         id = Integer.parseInt(raw_id);
     }
     try {
-        ClipartDB db = new ClipartDB();
+        ClipartDB clipartDb = new ClipartDB();
+        clipartDb.incrementViewCount(id);
         CategoryDB categoryDb = new CategoryDB();
 
-        Clipart clipart = db.getRecord(id);
+        Clipart clipart = clipartDb.getRecord(id);
         int categoryIdx = clipart.getCategoryId();
 
         Category category = categoryDb.getRecord(categoryIdx);
-
 %>
 <div class="main mt-5">
     <div class="clipart-image align-self-center">
@@ -79,13 +79,17 @@
             </span>
         </div>
         <div>
+            <span>다운로드수: <%=clipart.getDownloadCount()%></span>
+            <span>조회수: <%=clipart.getViewCount()%></span>
+        </div>
+        <div>
             <button class="btn btn-outline-dark" onclick="location.href='clipart-modify.jsp?id=<%=clipart.getId()%>'">수정</button>
             <button class="btn btn-outline-dark" onclick="location.href='clipart-delete.jsp?id=<%=clipart.getId()%>'">삭제</button>
         </div>
     </div>
 </div>
 <%
-        db.close();
+        clipartDb.close();
         categoryDb.close();
     } catch (Exception e) {
         out.print(e);
