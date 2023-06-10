@@ -61,14 +61,12 @@ public class CategoryDB {
         rs = stmt.executeQuery("SELECT id, name FROM category");
         while(rs.next()) {
             int id = rs.getInt("id");
-            System.out.println(id);
             Category category = new Category();
             category.setId(id);
             category.setName(rs.getString("name"));
             category.setClipartCount(getCount(id));
             categoryList.add(category);
         }
-        System.out.println(categoryList);
         return categoryList;
     }
 

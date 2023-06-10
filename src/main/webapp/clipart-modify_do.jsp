@@ -16,7 +16,7 @@
 
     ClipartDB db = new ClipartDB();
     if (!db.checkPassword(id, password)) {
-        response.sendRedirect("clipart-modify.jsp?id=" + id);
+        response.sendRedirect("clipart-modify.jsp?id=" + id + "&passwordDoesNotMatch=true");
     } else {
         String originalFileName, savedFileName;
         Clipart oldClipart = db.getRecord(id);

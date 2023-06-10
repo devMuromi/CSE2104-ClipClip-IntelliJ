@@ -36,7 +36,7 @@
         }
     </style>
     <script>
-        function submitForm(event) {
+        function submitForm() {
             if (!document.getElementById("title").value) {
                 window.alert("제목을 입력해주세요.");
                 return false;
@@ -53,7 +53,11 @@
                 window.alert("비밀번호를 입력해주세요.");
                 return false;
             } else {
-                return true;
+                if (confirm("정말 수정하시겠습니까?")){
+                    document.modifyForm.submit();
+                }else{
+                    return false;
+                }
             }
         }
         function previewImage(event) {
@@ -91,7 +95,7 @@
 
             Category category = categoryDb.getRecord(categoryIdx);
     %>
-    <form onsubmit="return submitForm()" action="clipart-modify_do.jsp?id=<%=id%>" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
+    <form onsubmit="return submitForm()" action="clipart-modify_do.jsp?id=<%=id%>" name="modifyForm" method="post" class="d-flex w-75 mt-5 justify-content-center" enctype="multipart/form-data">
         <div class="form--image align-self-center">
             <label for="image-upload">
                 <img src="./upload/<%=clipart.getSavedFileName()%>" class="" id="preview-image"/>
@@ -99,6 +103,15 @@
             <input type="file" id="image-upload" name="imageFile" onchange="previewImage(event)"/>
         </div>
         <div class="form__box border p-3 ms-5 align-self-center">
+            <%
+                if(request.getParameter("passwordDoesNotMatch") != null){
+            %>
+            <div class="alert alert-warning" role="alert">
+                비밀번호가 일치하지 않습니다
+            </div>
+            <%
+                }
+            %>
             <div class="form-floating mb-3">
                 <input class="form-control" type="text" id="title"
                        placeholder="title" name="title" value="<%=clipart.getTitle()%>">
@@ -148,7 +161,7 @@
                        placeholder="password">
                 <label for="password">비밀번호 확인</label>
             </div>
-            <button class="btn btn-outline-dark" onclick="">등록하기</button>
+            <input class="btn btn-outline-dark" type="button" value="등록하기" onclick="submitForm()" />
         </div>
     </form>
     <%

@@ -58,19 +58,21 @@
     <div class="clipart-info border ms-5 p-3">
         <div>
             <span class="fs-1"><%=clipart.getTitle()%></span>
-            <span class="float-end fs-4 mt-2"><%=category.getName()%></span>
+            <span class="float-end fs-4 mt-3"><%=category.getName()%></span>
         </div>
         <div class="fst-italic">
             <%
+                // 태그(문자열)
                 String[] tags = clipart.getTags();
-                for (String tag: tags){
+                for (String tag: tags) {
+                    if(tag.isEmpty()) { continue; }
                     out.print("#" + tag + " ");
                 }
             %>
         </div>
-        <div><%=clipart.getDescription()%></div>
+        <div>클립아트 설명: <%out.print((clipart.getDescription()==null ||clipart.getDescription().equals("null"))? "설명이 없습니다":clipart.getDescription());%></div>
         <div>
-            <span><%=clipart.getAuthor()%></span>
+            <span>업로더명: <%=clipart.getAuthor()%></span>
             <span class="float-end">최종 수정일시:
                 <%=clipart.getLastUpdate().getYear()%>-<%=clipart.getLastUpdate().getMonthValue()%>-<%=clipart.getLastUpdate().getDayOfMonth()%>
                 <%=clipart.getLastUpdate().getHour()%>:<%=clipart.getLastUpdate().getMinute()%>

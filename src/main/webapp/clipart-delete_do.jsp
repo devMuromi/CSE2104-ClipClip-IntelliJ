@@ -7,7 +7,7 @@
 
     ClipartDB db = new ClipartDB();
     if(!db.checkPassword(id, password)) {
-        response.sendRedirect("clipart.jsp?id=" + id +"&passwordNotMatching=true");
+        response.sendRedirect("clipart-delete.jsp?id=" + id + "&passwordDoesNotMatch=true");
     }
     else {
         db.deleteRecord(id);
