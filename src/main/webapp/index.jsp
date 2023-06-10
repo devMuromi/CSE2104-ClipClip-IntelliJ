@@ -149,8 +149,8 @@
                 }
                 if (currentOrderBy.equals("latest")) {
                     sql += " ORDER BY lastUpdate DESC";
-                } else if (currentOrderBy.equals("downlaod")) {
-                    sql += " ORDER BY donwloadCount DESC";
+                } else if (currentOrderBy.equals("download")) {
+                    sql += " ORDER BY downloadCount DESC";
                 } else if (currentOrderBy.equals("view")) {
                     sql += " ORDER BY viewCount DESC";
                 }

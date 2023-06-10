@@ -23,6 +23,14 @@ public class ClipartDB {
         pstmt.executeUpdate();
     }
 
+    public void incrementDownloadCount(int id) throws SQLException {
+        String sql = "UPDATE clipart SET downloadCount = downloadCount + 1 WHERE id=?";
+        pstmt = con.prepareStatement(sql);
+        pstmt.setInt(1, id);
+        pstmt.executeUpdate();
+    }
+
+
     public boolean checkPassword(int id, String password) throws SQLException {
         String sql = "SELECT password FROM clipart WHERE id = ? AND password = PASSWORD(?)";
         pstmt = con.prepareStatement(sql);

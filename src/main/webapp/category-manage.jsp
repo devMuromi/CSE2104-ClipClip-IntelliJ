@@ -46,7 +46,6 @@
             <th>수정</th>
             <th>삭제</th>
         </tr>
-
         <%
             Connection con = null;
             Statement stmt = null;
@@ -60,12 +59,18 @@
                 while (rs.next()) {
                     String name = rs.getString("name");
                     int id = rs.getInt("id");
+                    int viewCount = categoryDb.getCount(id);
         %>
         <tr>
             <td><%=name%></td>
-            <td><%=categoryDb.getCount(id)%></td>
+            <td><%=viewCount%></td>
             <td><button onclick="modifyCategory(<%=id%>)">수정</button></td>
-            <td><a href="category-delete_do.jsp?id=<%=id%>">삭제</a></td>
+            <td><%if(viewCount == 0){%>
+                <a href="category-delete_do.jsp?id=<%=id%>">삭제</a>
+                <%} else { %>
+                <span>삭제불가</span>
+                <% }%>
+            </td>
         </tr>
         <%
                 }
