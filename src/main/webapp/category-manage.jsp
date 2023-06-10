@@ -23,13 +23,30 @@
                 display: flex;
             }
         </style>
+    <script>
+        function modifyCategory(id) {
+            let changedName = prompt("수정할 이름을 입력해주세요")
+            if (changedName === "") {
+                alert("분류명은 공백이 될 수 없습니다");
+            } else if(changedName == null){
+                return;
+            } else{
+                location.href = "category-modify_do.jsp?id=" + id + "&changedName=" + changedName;
+            }
+        }
+    </script>
 </head>
 <body>
 <%@ include file="template-header.jsp"%>
 <div class="main">
     <table class="w-50 table">
+        <tr>
             <th>이름</th>
+            <th>개수</th>
+            <th>수정</th>
             <th>삭제</th>
+        </tr>
+
         <%
             Connection con = null;
             Statement stmt = null;
@@ -39,16 +56,23 @@
                 stmt = con.createStatement();
                 String query = "SELECT id, name FROM category";
                 rs = stmt.executeQuery(query);
+                CategoryDB categoryDb = new CategoryDB();
                 while (rs.next()) {
+                    String name = rs.getString("name");
+                    int id = rs.getInt("id");
         %>
         <tr>
-            <td><%=rs.getString("name")%></td><td><a href="category-delete_do.jsp?id=<%=rs.getInt("id")%>">삭제</a></td>
+            <td><%=name%></td>
+            <td><%=categoryDb.getCount(id)%></td>
+            <td><button onclick="modifyCategory(<%=id%>)">수정</button></td>
+            <td><a href="category-delete_do.jsp?id=<%=id%>">삭제</a></td>
         </tr>
         <%
                 }
                 rs.close(); // ResultSet 종료
                 stmt.close(); // Statement 종료
                 con.close(); // Connection 종료
+                categoryDb.close();
             } catch (SQLException e) {
                 out.println("err:" + e.toString());
                 return;

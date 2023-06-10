@@ -4,6 +4,7 @@ public class Category
 {
     private int id;
     private String name;
+    private int clipartCount;
 
     public Category() {
     }
@@ -21,5 +22,9 @@ public class Category
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getClipartCount() { return clipartCount; }
+
+    public void setClipartCount(int clipartCount) { this.clipartCount = clipartCount; }
 }
 

@@ -10,9 +10,14 @@
             response.sendRedirect("login.jsp");
         } else {
             int id = Integer.parseInt(request.getParameter("id"));
+            String changedName = request.getParameter("changedName");
             try {
+                Category category = new Category();
+                category.setId(id);
+                category.setName(changedName);
+
                 CategoryDB CategoryDb = new CategoryDB();
-                CategoryDb.deleteRecord(id);
+                CategoryDb.updateRecord(category);
                 CategoryDb.close();
             } catch (SQLException e) {
                 out.println("err:" + e.toString());

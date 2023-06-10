@@ -84,11 +84,7 @@ public class ClipartDB {
     }
 
     public void updateRecord(Clipart clipart) throws SQLException {
-//        String sql = "INSERT INTO clipart(title, user, category_id, password, tags, description, file, create_date, last_update) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
         String sql = "UPDATE clipart SET title=?, author=?, categoryId=?, tags=?, description=?, lastUpdate=?, originalFileName=?, savedFileName=? WHERE id=?";
-        pstmt = con.prepareStatement(sql);
-
         pstmt = con.prepareStatement(sql);
 
         pstmt.setString(1, clipart.getTitle());
